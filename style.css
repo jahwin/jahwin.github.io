@@ -66,8 +66,9 @@
 }
 
 .empty-widget {
-    margin: 100px 80px;
+    margin: 40px 80px;
     text-align: center;
+    color: rgb(190, 190, 190);
 }
 
 .user-item {
