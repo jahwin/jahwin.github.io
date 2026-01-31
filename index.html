@@ -4,119 +4,636 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abe Jahwin - Resume</title>
+    <meta name="description"
+        content="Abe Jahwin - Senior Full-Stack Software Engineer with 9+ years of experience in JavaScript, TypeScript, React, Next.js, and more.">
+    <title>Abe Jahwin | Senior Software Engineer</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="profile-section">
-                    <img src="assets/images/profile.png" alt="Jahwin Profile" class="profile-img">
-                    <div class="profile-info">
-                        <h1 class="name">Abe Jahwin</h1>
-                        <p class="title">Professional Resume</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+        </div>
+
+        <!-- Vertical Side Text -->
+        <div class="vertical-text">PORTFOLIO</div>
+
+        <!-- Top Corner Info -->
+        <div class="corner-info top-left">
+            <p>SINCE</p>
+            <h4>2016</h4>
+        </div>
+
+        <div class="corner-info top-right">
+            <p>AVAILABLE</p>
+            <h4>24/7</h4>
+        </div>
+
+        <div class="hero-center">
+            <div class="hero-badge">
+                <div class="badge-dot"></div>
+                SENIOR DEVELOPER
+            </div>
+            <h1 class="hero-title">
+                Welcome to my<br>
+                <span class="text-outline">professional</span><br>
+                portfolio
+            </h1>
+
+        </div>
+
+        <!-- Floating Info Card -->
+        <div class="floating-profile">
+            <div class="circular-frame">
+                <img src="assets/images/profile.png" alt="Abe Jahwin">
+                <svg class="dotted-circle" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="95" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"
+                        stroke-dasharray="5,10" />
+                </svg>
+            </div>
+            <div class="profile-meta">
+                <h4>Abe Jahwin</h4>
+                <p>Full-Stack Engineer</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="hero-stats-modern">
+            <!-- Why Choose Section -->
+            <div class="hero-stat-card stat-card-large">
+                <h3 class="stat-card-title">WHY CHOOSE<br>ABE JAHWIN?</h3>
+                <button class="btn-stat-more"
+                    onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                    Read more <i class="fas fa-arrow-down"></i>
+                </button>
+            </div>
+
+            <!-- Diverse Tech Stack -->
+            <div class="hero-stat-card stat-card-chart">
+                <h4 class="stat-card-label">DIVERSE TECH STACK.</h4>
+                <div class="stat-pie-chart">
+                    <svg viewBox="0 0 200 200">
+                        <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.1)" stroke-width="15" fill="none" />
+                        <!-- 70% Frontend (251.2 dashoffset) -->
+                        <circle cx="100" cy="100" r="80" stroke="#fff" stroke-width="15" fill="none"
+                            stroke-dasharray="502.4" stroke-dashoffset="150.72" transform="rotate(-90 100 100)"
+                            class="chart-segment-1" />
+                        <!-- 15% Backend -->
+                        <circle cx="100" cy="100" r="80" stroke="rgba(255,107,53,0.8)" stroke-width="15" fill="none"
+                            stroke-dasharray="502.4" stroke-dashoffset="427.04" transform="rotate(162 100 100)"
+                            class="chart-segment-2" />
+                        <!-- 15% DevOps -->
+                        <circle cx="100" cy="100" r="80" stroke="rgba(102,126,234,0.8)" stroke-width="15" fill="none"
+                            stroke-dasharray="502.4" stroke-dashoffset="427.04" transform="rotate(216 100 100)"
+                            class="chart-segment-3" />
+                    </svg>
+                    <div class="chart-center-text">
+                        <h3>70%</h3>
+                        <p>FRONTEND</p>
                     </div>
                 </div>
-                <div class="action-buttons">
-                    <button class="btn btn-primary" onclick="downloadResume()">
-                        <i class="fas fa-download"></i>
-                        Download PDF
-                    </button>
-                    <button class="btn btn-secondary" onclick="toggleFullscreen()">
-                        <i class="fas fa-expand"></i>
-                        Fullscreen
-                    </button>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot dot-backend"></span>
+                        <span>15%<br>Backend</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot dot-devops"></span>
+                        <span>15%<br>DevOps</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Professional Profile -->
+            <div class="hero-stat-card stat-card-profile">
+                <h4 class="stat-card-label">PROFESSIONAL<br>DEVELOPER.</h4>
+                <div class="stat-profile-display">
+                    <img src="assets/images/profile.png" alt="Abe Jahwin">
+                    <div class="stat-profile-info">
+                        <h5>Abe Jahwin</h5>
+                        <p>9+ YEAR EXP</p>
+                    </div>
+                </div>
+                <div class="stat-nav-arrows">
+                    <button class="stat-arrow-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="stat-arrow-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Projects Count -->
+            <div class="hero-stat-card stat-card-count">
+                <p class="stat-count-label">COMPLETED PROJECTS</p>
+                <div class="stat-count-badge">/NOW</div>
+                <div class="stat-count-display">
+                    <i class="fas fa-check-circle"></i>
+                    <h2 class="stat-big-number" data-target="50">50</h2>
                 </div>
             </div>
         </div>
-    </header>
 
-    <main class="main">
+        <!-- Social Links Side -->
+        <div class="social-side">
+            <p>STAY CONNECTED</p>
+            <a href="https://linkedin.com/in/abe-jahwin-00a489191/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com/jahwin" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:ajahwin@gmail.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <!-- Vertical Side Text -->
+        <div class="vertical-text-section">WHO AM I?</div>
+
         <div class="container">
-            <div class="resume-container">
-                <div class="resume-header">
-                    <h2><i class="fas fa-file-pdf"></i> My Resume</h2>
-                    <div class="resume-controls">
-                        <button class="control-btn" onclick="zoomOut()" title="Zoom Out">
-                            <i class="fas fa-search-minus"></i>
-                        </button>
-                        <span class="zoom-level">100%</span>
-                        <button class="control-btn" onclick="zoomIn()" title="Zoom In">
-                            <i class="fas fa-search-plus"></i>
-                        </button>
-                        <button class="control-btn" onclick="resetZoom()" title="Reset Zoom">
-                            <i class="fas fa-undo"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="pdf-viewer-wrapper">
-                    <div class="loading-spinner" id="loadingSpinner">
-                        <i class="fas fa-spinner fa-spin"></i>
-                        <p>Loading resume...</p>
-                    </div>
-
-                    <iframe id="pdfViewer" src="assets/resume.pdf#toolbar=1&navpanes=0&scrollbar=1"
-                        type="application/pdf" class="pdf-viewer" title="Jahwin Resume PDF" onload="hideLoading()">
-                        <div class="pdf-fallback">
-                            <h3><i class="fas fa-exclamation-triangle"></i> PDF Preview Not Available</h3>
-                            <p>Your browser doesn't support PDF preview. Please download the file to view it.</p>
-                            <button class="btn btn-primary" onclick="downloadResume()">
-                                <i class="fas fa-download"></i>
-                                Download Resume
-                            </button>
+            <div class="about-header">
+                <div class="about-title-area">
+                    <span class="section-tag">/ABOUT</span>
+                    <h2 class="section-title-alt">I'm dedicated to<br>creating premium<br>software solutions</h2>
+                    <p class="section-subtitle">Software engineer with over nine years of experience. Primary technology
+                        stack includes JavaScript, TypeScript, NestJS REST framework, Next.js for full-stack
+                        development, Docker, CI/CD pipelines, Heroku and AWS, test-driven development, C++, and Laravel
+                        for PHP. Currently working primarily with Next.js full-stack framework and planning to learn
+                        Rust.</p>
+                    <button class="btn-explore-round"
+                        onclick="document.getElementById('skills').scrollIntoView({behavior: 'smooth'})">
+                        <span>Explore</span>
+                        <div class="btn-circle-small">
+                            <i class="fas fa-arrow-right"></i>
                         </div>
-                    </iframe>
+                    </button>
                 </div>
 
-                <div class="resume-footer">
-                    <div class="footer-info">
-                        <p><i class="fas fa-info-circle"></i> This resume is always up-to-date with my latest experience
-                            and skills.</p>
+                <div class="team-preview">
+                    <p>Expert<br>Developer</p>
+                    <div class="team-avatars">
+                        <div class="avatar">
+                            <img src="assets/images/profile.png" alt="Team">
+                        </div>
                     </div>
-                    <div class="footer-actions">
-                        <button class="btn btn-outline" onclick="printResume()">
-                            <i class="fas fa-print"></i>
-                            Print
-                        </button>
-                        <button class="btn btn-outline" onclick="shareResume()">
-                            <i class="fas fa-share-alt"></i>
-                            Share
-                        </button>
+                </div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card large-card">
+                    <div class="card-number">01</div>
+                    <button class="btn-circle-explore">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="card-image-round">
+                        <img src="assets/images/profile.png" alt="Expertise">
+                        <svg class="dotted-path" viewBox="0 0 300 300">
+                            <path d="M 50 150 Q 150 50 250 150" stroke="rgba(255,255,255,0.3)" stroke-width="2"
+                                fill="none" stroke-dasharray="5,10" />
+                        </svg>
+                    </div>
+                    <h3>Full-Stack<br>Development</h3>
+                    <p>9+ years building scalable applications with JavaScript, TypeScript, NestJS, Next.js, Laravel,
+                        Docker, CI/CD pipelines, AWS, Heroku, and more. Specialized in authentication systems,
+                        e-commerce platforms, management systems, and streaming engines.</p>
+                </div>
+
+                <div class="about-card">
+                    <i class="card-icon fas fa-handshake"></i>
+                    <h4>Professional<br>collaboration</h4>
+                    <p>Agile & Scrum methodologies with Trello, Shortcut, and Toggl for time tracking. Test-driven
+                        development, code coverage, and code quality focus.</p>
+                    <button class="btn-circle-link">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="about-card dark-card">
+                    <div class="circular-badge">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h4>Remote Work<br>Expert</h4>
+                    <p>4+ years with global teams from India, Nigeria, Singapore (Strategic Creative Consulting Pte.
+                        Ltd), and currently contributing to a Swedish company based in Stockholm.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <!-- Vertical Side Text -->
+        <div class="vertical-text-section">EXPERTISE</div>
+
+        <div class="container">
+            <div class="section-split">
+                <div class="split-left">
+                    <h2 class="title-huge">WHY<br>CHOOSE<br>ABE<br>JAHWIN?</h2>
+                    <p style="font-size: 1.1rem; color: rgba(255,255,255,0.7); margin: 30px 0; line-height: 1.6;">
+                        Over nine years of experience developing authentication systems, e-commerce platforms,
+                        management systems (hardware, school, library, law firm tools, HR systems, property management),
+                        and streaming engines. Highly passionate about continuous improvement, learning new skills, and
+                        refining workflow according to industry best practices.
+                    </p>
+                    <button class="btn-read-more">
+                        Read more <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="split-right">
+                    <!-- Tech Stack Stats -->
+                    <div class="stats-card">
+                        <h3>DIVERSE TECH STACK</h3>
+                        <div class="pie-chart">
+                            <svg viewBox="0 0 200 200">
+                                <circle cx="100" cy="100" r="80" stroke="rgba(255,255,255,0.1)" stroke-width="15"
+                                    fill="none" />
+                                <circle cx="100" cy="100" r="80" stroke="#fff" stroke-width="15" fill="none"
+                                    stroke-dasharray="502.4" stroke-dashoffset="150.72"
+                                    transform="rotate(-90 100 100)" />
+                            </svg>
+                            <div class="chart-center">
+                                <h4>70%</h4>
+                                <p>FRONTEND</p>
+                            </div>
+                        </div>
+                        <div class="chart-labels">
+                            <div class="label-item">
+                                <span class="dot"></span>
+                                <span>15% Backend</span>
+                            </div>
+                            <div class="label-item">
+                                <span class="dot"></span>
+                                <span>15% DevOps</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Card -->
+                    <div class="professional-card">
+                        <h3>PROFESSIONAL<br>DEVELOPER</h3>
+                        <div class="profile-display">
+                            <img src="assets/images/profile.png" alt="Abe Jahwin">
+                            <div class="profile-text">
+                                <h4>Abe Jahwin</h4>
+                                <p>9+ Years Experience</p>
+                                <p style="font-size: 0.8rem; margin-top: 5px; color: rgba(255,255,255,0.6);">Since
+                                    January 2020, focused on JavaScript ecosystem</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.6;">
+                                Developed streaming engine using Node.js and C++. Contributed to Node.js frameworks.
+                                Created PHP framework inspired by Laravel and built Cagura Web application.
+                            </p>
+                        </div>
+                        <div class="nav-arrows">
+                            <button class="arrow-btn"><i class="fas fa-chevron-left"></i></button>
+                            <button class="arrow-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Grid -->
+            <div class="skills-showcase">
+                <div class="skill-category-card">
+                    <div class="category-badge">SAFETY FIRST</div>
+                    <h3>Code quality is my<br>top priority.</h3>
+                    <p style="margin: 20px 0; color: rgba(255,255,255,0.7); line-height: 1.6;">Strong experience with
+                        test-driven development, Docker, code coverage, code quality, continuous integration, and
+                        continuous delivery. Worked extensively with cloud platforms: AWS, DigitalOcean, Heroku,
+                        self-hosted solutions like Colify, and content delivery networks.</p>
+                    <button class="btn-text-arrow">
+                        Read more <i class="fas fa-long-arrow-right"></i>
+                    </button>
+                    <div class="card-bg-image">
+                        <div class="gradient-overlay"></div>
+                    </div>
+                </div>
+
+                <div class="skill-category-card availability-card">
+                    <h2>24/7</h2>
+                    <p class="card-tag">AVAILABILITY</p>
+                    <div class="icon-center">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <p>Need to discuss<br>a project at<br><strong>any time?</strong></p>
+                    <button class="btn-cta-round">
+                        CONTACT ME <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div class="skill-category-card team-card">
+                    <p class="card-label">TECHNOLOGIES</p>
+                    <div style="margin-top: 20px;">
+                        <p
+                            style="font-size: 0.9rem; color: rgba(255,255,255,0.8); margin-bottom: 15px; line-height: 1.6;">
+                            <strong>Frontend:</strong> JavaScript, TypeScript, React, Vue.js, Next.js<br>
+                            <strong>Backend:</strong> NestJS, Node.js, Laravel, PHP, C++<br>
+                            <strong>DevOps:</strong> Docker, CI/CD, AWS, Heroku, DigitalOcean<br>
+                            <strong>Mobile:</strong> Kotlin, Flutter<br>
+                            <strong>Planning:</strong> Rust (learning)
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <!-- Vertical Side Text -->
+        <div class="vertical-text-section">JOURNEY</div>
+
+        <div class="container">
+            <div class="experience-header">
+                <h2 class="title-huge">HOW IT<br>WORKS:</h2>
+                <button class="btn-explore-round">
+                    <span>Explore</span>
+                    <div class="btn-circle-small">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </button>
+            </div>
+
+            <div class="experience-visual">
+                <div class="visual-path">
+                    <svg class="connecting-path" viewBox="0 0 800 600">
+                        <path d="M 100 50 Q 400 100 400 300 Q 400 500 700 550" stroke="rgba(255,255,255,0.2)"
+                            stroke-width="3" fill="none" stroke-dasharray="10,15" />
+                    </svg>
+
+                    <div class="path-image">
+                        <img src="assets/images/profile.png" alt="Work Process">
+                    </div>
+
+                    <div class="path-label label-track">
+                        <span class="number-circle">8</span>
+                        TRACK
+                    </div>
+                </div>
+
+                <div class="experience-steps">
+                    <div class="step-item">
+                        <div class="step-number">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h4>1. DISCOVER</h4>
+                        <p>Understanding your requirements</p>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">
+                            <i class="fas fa-location-arrow"></i>
+                        </div>
+                        <h4>2. PLAN</h4>
+                        <p>Architecting the solution</p>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>3. DEVELOP</h4>
+                        <p>Building with best practices</p>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>4. DELIVER</h4>
+                        <p>Deploying production-ready code</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-section">
+                <h3 class="timeline-title">PROFESSIONAL<br>EXPERIENCE</h3>
+
+                <div class="professional-experience-grid">
+                    <!-- Current Position - Featured -->
+                    <div class="experience-featured-card">
+                        <div class="experience-header-top">
+                            <span class="experience-badge">CURRENT</span>
+                            <div class="experience-nav-dots">
+                                <button class="dot-btn active"></button>
+                                <button class="dot-btn"></button>
+                            </div>
+                        </div>
+
+                        <div class="experience-profile-section">
+                            <div class="experience-profile-image">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div class="experience-profile-info">
+                                <h4>Full-stack Web Developer</h4>
+                                <p class="experience-duration">2022 - Present</p>
+                                <p class="experience-company">Lange Technologies</p>
+                            </div>
+                        </div>
+
+                        <div class="experience-location-tag">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Kigali, Rwanda</span>
+                        </div>
+
+                        <div class="tech-tags-modern">
+                            <span>Next.js</span>
+                            <span>TypeScript</span>
+                            <span>NestJS</span>
+                            <span>AWS</span>
+                            <span>Docker</span>
+                            <span>CI/CD</span>
+                        </div>
+                    </div>
+
+                    <!-- Other Positions -->
+                    <div class="experience-compact-card">
+                        <span class="experience-badge-small">PREVIOUS</span>
+                        <div class="experience-compact-content">
+                            <div class="experience-image-circle">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="experience-compact-info">
+                                <h5>Senior Frontend Developer</h5>
+                                <p class="exp-company">RW Build</p>
+                                <p class="exp-year">2020 - 2022</p>
+                            </div>
+                        </div>
+                        <div class="tech-tags-small">
+                            <span>React</span>
+                            <span>Vue.js</span>
+                            <span>JavaScript</span>
+                            <span>TypeScript</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-compact-card">
+                        <span class="experience-badge-small founder-badge">FOUNDER</span>
+                        <div class="experience-compact-content">
+                            <div class="experience-image-circle">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="experience-compact-info">
+                                <h5>Founder & CTO</h5>
+                                <p class="exp-company">Wecodefy Ltd</p>
+                                <p class="exp-year">2018 - 2020</p>
+                            </div>
+                        </div>
+                        <div class="tech-tags-small">
+                            <span>Node.js</span>
+                            <span>C++</span>
+                            <span>Streaming Engine</span>
+                        </div>
+                    </div>
+
+                    <div class="experience-compact-card">
+                        <span class="experience-badge-small">PREVIOUS</span>
+                        <div class="experience-compact-content">
+                            <div class="experience-image-circle">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="experience-compact-info">
+                                <h5>Senior Frontend Developer</h5>
+                                <p class="exp-company">Consultified</p>
+                                <p class="exp-year">2016 - 2018</p>
+                            </div>
+                        </div>
+                        <div class="tech-tags-small">
+                            <span>Laravel</span>
+                            <span>PHP</span>
+                            <span>Frontend</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-header-new">
+                <span class="section-tag">/CONTACT</span>
+                <h2 class="contact-title-big">Let's create<br>something<br><span class="text-outline">amazing</span>
+                </h2>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card contact-card-primary">
+                    <div class="card-badge-top">AVAILABLE NOW</div>
+                    <h3>Ready to start<br>your project?</h3>
+                    <p>I'm always interested in hearing about new projects and opportunities. I have extensive
+                        experience developing applications including authentication systems, e-commerce platforms,
+                        management systems (hardware, school, library, law firm tools, HR systems, property management),
+                        and streaming engines. Most solutions are internal and cannot be shared publicly, but I was
+                        responsible for the full development lifecycle including planning, requirement analysis, system
+                        design, testing, and implementation.</p>
+                    <a href="mailto:ajahwin@gmail.com" class="btn-contact-primary">
+                        Get in Touch
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="contact-card contact-card-email">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Email Me</h4>
+                    <a href="mailto:ajahwin@gmail.com">ajahwin@gmail.com</a>
+                </div>
+
+                <div class="contact-card contact-card-phone">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h4>Call Me</h4>
+                    <a href="tel:+250785009529">+(250) 785 009 529</a>
+                    <p style="font-size: 0.85rem; margin-top: 5px; color: rgba(255,255,255,0.6);">Call/WhatsApp</p>
+                </div>
+
+                <div class="contact-card contact-card-location">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>Location</h4>
+                    <p>Kigali, Rwanda</p>
+                </div>
+
+                <div class="contact-card contact-card-social">
+                    <h4>Follow Me</h4>
+                    <div class="social-links-grid">
+                        <a href="https://github.com/jahwin" target="_blank" aria-label="GitHub" class="social-card">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/abe-jahwin-00a489191/" target="_blank"
+                            aria-label="LinkedIn" class="social-card">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://wa.me/250785009529" target="_blank" aria-label="WhatsApp" class="social-card">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </a>
+                    </div>
+                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <h4 style="font-size: 1rem; margin-bottom: 15px; color: rgba(255,255,255,0.7);">Languages</h4>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <span
+                                style="padding: 8px 15px; background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.9rem;">English</span>
+                            <span
+                                style="padding: 8px 15px; background: rgba(255,255,255,0.03); border-radius: 10px; font-size: 0.9rem;">Kinyarwanda</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card contact-card-download">
+                    <h4>Download</h4>
+                    <div class="download-links">
+                        <a href="CV Resume.pdf" download class="download-link">
+                            <i class="fas fa-file-pdf"></i>
+                            <span>Resume / CV</span>
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-left">
-                    <p>&copy; 2025 Abe Jahwin. All rights reserved.</p>
+                    <h3 class="footer-logo">AJ</h3>
+                    <p>&copy; 2026 Abe Jahwin. All rights reserved.</p>
                 </div>
                 <div class="footer-right">
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/abe-jahwin-00a489191" class="social-link" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/jahwin" class="social-link" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:ajahwin@gmail.com" class="social-link" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
+                    <p>Designed & Built with <i class="fas fa-heart"></i> by Abe Jahwin</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="main.js"></script>
 </body>

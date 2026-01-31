@@ -1,375 +1,360 @@
-// Global variables
-let currentZoom = 100;
-let isFullscreen = false;
-
-// Wait for DOM to be ready
+// ===== MAIN SCRIPT =====
 document.addEventListener('DOMContentLoaded', function () {
-    initializePage();
-});
 
-// Initialize page functionality
-function initializePage() {
-    // Add smooth scrolling
-    document.documentElement.style.scrollBehavior = 'smooth';
+    // ===== SCROLL TO TOP BUTTON =====
+    const scrollToTopBtn = document.getElementById('scrollToTop');
 
-    // Add keyboard shortcuts
-    document.addEventListener('keydown', handleKeyboardShortcuts);
-
-    // Add escape key handler for fullscreen
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && isFullscreen) {
-            toggleFullscreen();
+    window.addEventListener('scroll', function () {
+        if (window.pageYOffset > 500) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
         }
     });
 
-    // Add loading animation
-    showLoadingAnimation();
-
-    // Add window resize handler
-    window.addEventListener('resize', handleWindowResize);
-
-    console.log('Resume page initialized successfully!');
-}
-
-// Handle keyboard shortcuts
-function handleKeyboardShortcuts(e) {
-    // Ctrl/Cmd + Plus: Zoom in
-    if ((e.ctrlKey || e.metaKey) && e.key === '+') {
-        e.preventDefault();
-        zoomIn();
-    }
-
-    // Ctrl/Cmd + Minus: Zoom out
-    if ((e.ctrlKey || e.metaKey) && e.key === '-') {
-        e.preventDefault();
-        zoomOut();
-    }
-
-    // Ctrl/Cmd + 0: Reset zoom
-    if ((e.ctrlKey || e.metaKey) && e.key === '0') {
-        e.preventDefault();
-        resetZoom();
-    }
-
-    // Ctrl/Cmd + D: Download
-    if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
-        e.preventDefault();
-        downloadResume();
-    }
-
-    // F11: Toggle fullscreen
-    if (e.key === 'F11') {
-        e.preventDefault();
-        toggleFullscreen();
-    }
-}
-
-// Download resume function
-function downloadResume() {
-    try {
-        const link = document.createElement('a');
-        link.href = 'assets/resume.pdf';
-        link.download = 'Jahwin_Resume.pdf';
-        link.target = '_blank';
-
-        // Add some visual feedback
-        showNotification('Downloading resume...', 'success');
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Track download (you can add analytics here)
-        console.log('Resume downloaded');
-
-    } catch (error) {
-        console.error('Download failed:', error);
-        showNotification('Download failed. Please try again.', 'error');
-    }
-}
-
-// Toggle fullscreen mode
-function toggleFullscreen() {
-    const pdfContainer = document.querySelector('.resume-container');
-    const fullscreenBtn = document.querySelector('.btn-secondary');
-
-    try {
-        if (!isFullscreen) {
-            // Enter fullscreen
-            pdfContainer.classList.add('fullscreen');
-            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Exit Fullscreen';
-            isFullscreen = true;
-            showNotification('Press ESC to exit fullscreen', 'info');
-        } else {
-            // Exit fullscreen
-            pdfContainer.classList.remove('fullscreen');
-            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
-            isFullscreen = false;
-        }
-    } catch (error) {
-        console.error('Fullscreen toggle failed:', error);
-        showNotification('Fullscreen mode not available', 'error');
-    }
-}
-
-// Zoom functions
-function zoomIn() {
-    if (currentZoom < 200) {
-        currentZoom += 10;
-        updateZoom();
-        showNotification(`Zoomed to ${currentZoom}%`, 'info');
-    }
-}
-
-function zoomOut() {
-    if (currentZoom > 50) {
-        currentZoom -= 10;
-        updateZoom();
-        showNotification(`Zoomed to ${currentZoom}%`, 'info');
-    }
-}
-
-function resetZoom() {
-    currentZoom = 100;
-    updateZoom();
-    showNotification('Zoom reset to 100%', 'info');
-}
-
-function updateZoom() {
-    const pdfViewer = document.getElementById('pdfViewer');
-    const zoomLevel = document.querySelector('.zoom-level');
-
-    if (pdfViewer && zoomLevel) {
-        pdfViewer.style.transform = `scale(${currentZoom / 100})`;
-        pdfViewer.style.transformOrigin = 'top center';
-        zoomLevel.textContent = `${currentZoom}%`;
-    }
-}
-
-// Print resume function
-function printResume() {
-    try {
-        const pdfViewer = document.getElementById('pdfViewer');
-        if (pdfViewer) {
-            // Try to print the PDF directly
-            pdfViewer.contentWindow.print();
-            showNotification('Opening print dialog...', 'success');
-        } else {
-            // Fallback: open PDF in new window for printing
-            window.open('assets/resume.pdf', '_blank');
-            showNotification('PDF opened in new tab for printing', 'info');
-        }
-    } catch (error) {
-        console.error('Print failed:', error);
-        // Fallback: open PDF in new window
-        window.open('assets/resume.pdf', '_blank');
-        showNotification('PDF opened in new tab', 'info');
-    }
-}
-
-// Share resume function
-function shareResume() {
-    try {
-        if (navigator.share) {
-            // Use Web Share API if available
-            navigator.share({
-                title: 'Jahwin\'s Resume',
-                text: 'Check out my professional resume',
-                url: window.location.href
-            }).then(() => {
-                showNotification('Resume shared successfully!', 'success');
-            }).catch((error) => {
-                console.error('Share failed:', error);
-                fallbackShare();
-            });
-        } else {
-            fallbackShare();
-        }
-    } catch (error) {
-        console.error('Share failed:', error);
-        fallbackShare();
-    }
-}
-
-// Fallback share function
-function fallbackShare() {
-    try {
-        // Copy URL to clipboard
-        const url = window.location.href;
-        navigator.clipboard.writeText(url).then(() => {
-            showNotification('Link copied to clipboard!', 'success');
-        }).catch(() => {
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = url;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            showNotification('Link copied to clipboard!', 'success');
+    scrollToTopBtn.addEventListener('click', function () {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
-    } catch (error) {
-        console.error('Clipboard copy failed:', error);
-        showNotification('Unable to share. Please copy the URL manually.', 'error');
-    }
-}
+    });
 
-// Hide loading spinner when PDF loads
-function hideLoading() {
-    const spinner = document.getElementById('loadingSpinner');
-    if (spinner) {
+    // ===== ANIMATED COUNTER FOR STATS =====
+    function animateCounter(element, target, duration = 2000, showPlus = false) {
+        const start = 0;
+        const increment = target / (duration / 16); // 60fps
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current) + (showPlus ? '+' : '');
+        }, 16);
+    }
+
+    // Trigger counters when they come into view
+    const statNumbers = document.querySelectorAll('.stat-number, .stat-big, .stat-big-number');
+    let countersStarted = false;
+
+    const observerOptions = {
+        threshold: 0.3
+    };
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !countersStarted) {
+                countersStarted = true;
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    if (target) {
+                        // Check if element should show '+' sign
+                        const showPlus = stat.classList.contains('stat-number') || stat.classList.contains('stat-big');
+                        animateCounter(stat, target, 2000, showPlus);
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    const heroStats = document.querySelector('.hero-stats, .hero-stats-modern');
+    if (heroStats) {
+        counterObserver.observe(heroStats);
+    }
+
+    // ===== SCROLL ANIMATIONS =====
+    const scrollElements = document.querySelectorAll('.about-content, .skills-category, .timeline-item, .contact-content');
+
+    const elementInView = (el, percentageScroll = 100) => {
+        const elementTop = el.getBoundingClientRect().top;
+        return (
+            elementTop <=
+            ((window.innerHeight || document.documentElement.clientHeight) * (percentageScroll / 100))
+        );
+    };
+
+    const displayScrollElement = (element) => {
+        element.classList.add('scroll-animate', 'active');
+    };
+
+    const hideScrollElement = (element) => {
+        element.classList.remove('active');
+    };
+
+    const handleScrollAnimation = () => {
+        scrollElements.forEach((el) => {
+            if (elementInView(el, 80)) {
+                displayScrollElement(el);
+            }
+        });
+    };
+
+    window.addEventListener('scroll', () => {
+        handleScrollAnimation();
+    });
+
+    // Initial check for elements already in view
+    handleScrollAnimation();
+
+    // ===== PIE CHART ANIMATION =====
+    const pieChartSegments = document.querySelectorAll('.chart-segment-1, .chart-segment-2, .chart-segment-3');
+    let chartAnimated = false;
+
+    const chartObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !chartAnimated) {
+                chartAnimated = true;
+                pieChartSegments.forEach(segment => {
+                    segment.style.transition = 'stroke-dashoffset 1.5s ease-in-out';
+                });
+            }
+        });
+    }, observerOptions);
+
+    const statPieChart = document.querySelector('.stat-pie-chart');
+    if (statPieChart) {
+        chartObserver.observe(statPieChart);
+    }
+
+    // ===== SKILL BARS ANIMATION =====
+    const skillBars = document.querySelectorAll('.skill-progress');
+    let skillsAnimated = false;
+
+    const skillsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !skillsAnimated) {
+                skillsAnimated = true;
+                skillBars.forEach(bar => {
+                    const progress = bar.getAttribute('data-progress');
+                    setTimeout(() => {
+                        bar.style.width = progress + '%';
+                    }, 200);
+                });
+            }
+        });
+    }, observerOptions);
+
+    const skillsSection = document.getElementById('skills');
+    if (skillsSection) {
+        skillsObserver.observe(skillsSection);
+    }
+
+    // ===== STAT CARD PROFILE NAVIGATION =====
+    const statArrowButtons = document.querySelectorAll('.stat-arrow-btn');
+    const statNavDots = document.querySelectorAll('.dot-btn');
+
+    statArrowButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+            // Add pulse effect
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 150);
+        });
+    });
+
+    statNavDots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+            statNavDots.forEach(d => d.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Contact form removed - using direct contact methods instead
+
+    // ===== GRADIENT ORB MOVEMENT =====
+    const orbs = document.querySelectorAll('.gradient-orb');
+
+    document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        orbs.forEach((orb, index) => {
+            const speed = (index + 1) * 0.02;
+            const x = (window.innerWidth / 2 - mouseX) * speed;
+            const y = (window.innerHeight / 2 - mouseY) * speed;
+
+            orb.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
+
+    // ===== SMOOTH REVEAL ON PAGE LOAD =====
+    window.addEventListener('load', function () {
+        document.body.style.opacity = '0';
         setTimeout(() => {
-            spinner.style.opacity = '0';
-            spinner.style.visibility = 'hidden';
+            document.body.style.transition = 'opacity 0.5s ease';
+            document.body.style.opacity = '1';
+        }, 100);
+    });
+
+    // ===== PARALLAX EFFECT FOR HERO IMAGE =====
+    const heroImage = document.querySelector('.profile-image');
+
+    if (heroImage) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = scrolled * 0.3;
+            heroImage.style.transform = `translateY(${parallax}px)`;
+        });
+    }
+
+    // ===== TYPING EFFECT FOR HERO SUBTITLE (Optional Enhancement) =====
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle) {
+        const text = heroSubtitle.textContent;
+        heroSubtitle.textContent = '';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                heroSubtitle.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        // Start typing effect after a delay
+        setTimeout(() => {
+            typeWriter();
         }, 1000);
     }
-}
 
-// Show loading animation
-function showLoadingAnimation() {
-    const spinner = document.getElementById('loadingSpinner');
-    if (spinner) {
-        spinner.style.opacity = '1';
-        spinner.style.visibility = 'visible';
-    }
-}
+    // ===== INTERSECTION OBSERVER FOR TIMELINE ITEMS =====
+    const timelineItems = document.querySelectorAll('.timeline-item');
 
-// Handle window resize
-function handleWindowResize() {
-    // Adjust PDF viewer height on mobile
-    const pdfWrapper = document.querySelector('.pdf-viewer-wrapper');
-    if (pdfWrapper && window.innerWidth <= 768) {
-        const headerHeight = document.querySelector('.header').offsetHeight;
-        const availableHeight = window.innerHeight - headerHeight - 100;
-        pdfWrapper.style.height = `${Math.max(400, availableHeight)}px`;
-    }
-}
-
-// Notification system
-function showNotification(message, type = 'info') {
-    // Remove existing notification
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas ${getNotificationIcon(type)}"></i>
-            <span>${message}</span>
-        </div>
-    `;
-
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${getNotificationColor(type)};
-        color: white;
-        padding: 12px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        z-index: 10000;
-        transform: translateX(400px);
-        transition: transform 0.3s ease;
-        max-width: 300px;
-        word-wrap: break-word;
-    `;
-
-    document.body.appendChild(notification);
-
-    // Animate in
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-
-    // Auto-remove after 3 seconds
-    setTimeout(() => {
-        notification.style.transform = 'translateX(400px)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 150);
             }
-        }, 300);
-    }, 3000);
-}
-
-// Get notification icon based on type
-function getNotificationIcon(type) {
-    switch (type) {
-        case 'success': return 'fa-check-circle';
-        case 'error': return 'fa-exclamation-circle';
-        case 'warning': return 'fa-exclamation-triangle';
-        default: return 'fa-info-circle';
-    }
-}
-
-// Get notification color based on type
-function getNotificationColor(type) {
-    switch (type) {
-        case 'success': return '#48bb78';
-        case 'error': return '#f56565';
-        case 'warning': return '#ed8936';
-        default: return '#667eea';
-    }
-}
-
-// Add smooth scrolling to navigation
-function smoothScrollTo(target) {
-    const element = document.querySelector(target);
-    if (element) {
-        element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
         });
-    }
-}
-
-// Performance monitoring
-function monitorPerformance() {
-    // Log page load time
-    window.addEventListener('load', () => {
-        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-        console.log(`Page loaded in ${loadTime}ms`);
+    }, {
+        threshold: 0.2
     });
-}
 
-// Initialize performance monitoring
-monitorPerformance();
+    timelineItems.forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s ease';
+        timelineObserver.observe(item);
+    });
 
-// Export functions for debugging (optional)
-if (typeof window !== 'undefined') {
-    window.resumePageUtils = {
-        downloadResume,
-        toggleFullscreen,
-        zoomIn,
-        zoomOut,
-        resetZoom,
-        printResume,
-        shareResume,
-        showNotification
-    };
-}
+    // ===== SOCIAL LINKS ANIMATION =====
+    const socialLinks = document.querySelectorAll('.social-link');
 
-// Add error handling for PDF loading
-document.addEventListener('DOMContentLoaded', function () {
-    const pdfViewer = document.getElementById('pdfViewer');
+    socialLinks.forEach((link, index) => {
+        link.style.animationDelay = `${index * 0.1}s`;
+    });
 
-    if (pdfViewer) {
-        pdfViewer.addEventListener('error', function () {
-            hideLoading();
-            showNotification('Unable to load PDF. Please try downloading instead.', 'error');
+    // ===== BUTTON RIPPLE EFFECT =====
+    const buttons = document.querySelectorAll('.btn');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function (e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+
+            this.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
         });
+    });
 
-        // Set a timeout for loading
-        setTimeout(() => {
-            if (document.getElementById('loadingSpinner').style.visibility !== 'hidden') {
-                hideLoading();
+    // Add ripple CSS dynamically
+    const style = document.createElement('style');
+    style.textContent = `
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
             }
-        }, 10000); // 10 second timeout
+        }
+    `;
+    document.head.appendChild(style);
+
+    // ===== THEME DETECTION =====
+    // Detect user's preferred color scheme
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    if (prefersDarkScheme.matches) {
+        console.log('Dark mode detected - you can add dark theme classes here if needed');
     }
+
+    // ===== PERFORMANCE OPTIMIZATION =====
+    // Debounce function for scroll events
+    function debounce(func, wait = 10, immediate = true) {
+        let timeout;
+        return function () {
+            const context = this, args = arguments;
+            const later = function () {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
+
+    // Apply debounce to scroll-heavy functions
+    window.addEventListener('scroll', debounce(function () {
+        // Scroll-dependent functions here
+    }));
+
+    // ===== ACCESSIBILITY ENHANCEMENTS =====
+    // Keyboard navigation support (reserved for future use)
+
+    // ===== CONSOLE MESSAGE =====
+    console.log('%c👋 Hello! Thanks for checking out my portfolio!', 'font-size: 16px; color: #6366f1; font-weight: bold;');
+    console.log('%c🚀 Built with vanilla HTML, CSS, and JavaScript', 'font-size: 14px; color: #64748b;');
+    console.log('%c📧 Contact me at: ajahwin@gmail.com', 'font-size: 14px; color: #64748b;');
+
 });
+
+// ===== LOADING PERFORMANCE =====
+// Preload critical resources
+window.addEventListener('load', function () {
+    // Mark page as fully loaded
+    document.body.classList.add('loaded');
+});
+
+// ===== ERROR HANDLING =====
+window.addEventListener('error', function (e) {
+    console.error('An error occurred:', e.error);
+});
+
+// ===== SERVICE WORKER (Optional - for PWA features) =====
+if ('serviceWorker' in navigator) {
+    // Uncomment if you want to add PWA functionality
+    // navigator.serviceWorker.register('/sw.js')
+    //     .then(reg => console.log('Service Worker registered', reg))
+    //     .catch(err => console.log('Service Worker registration failed', err));
+}
